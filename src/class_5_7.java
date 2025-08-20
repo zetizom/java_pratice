@@ -52,8 +52,8 @@ public class class_5_7 {
 		for (Animal animal: animals) {
 			animal.eat();
 			if (animal instanceof Flyable) {
-				((Flyable)animal).fly();
-			}
+				((Flyable)animal).fly(); // 현재 Animal타입에서는 fly를 사용할 수
+			}  // 없으니(추상메서드에 정의 x) Flyable로 낮추워서 fly 메서드 사용
 		}
 	}
 }
