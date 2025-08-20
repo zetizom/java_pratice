@@ -27,7 +27,9 @@ class Magazine extends Book {
     }
 }
 
+
 public class class_5_2 {
+
     public static void main(String[] args) {
         Book book = new Book("점프투자바", "박응용");
         Book book2 = new Book("de", "er");
