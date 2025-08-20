@@ -1,17 +1,17 @@
-interface Calculabe {
-	int sum (int a, int b);
-}
+interface Calculable {
+	int sum (int a, int b); // 인터페이스의 역할은 최소한 이 기능을 가지고 있다!
+}                        	// 상속 받은 아이들도!!!
 
-class SimpleCalculator {
+class SimpleCalculator implements Calculable{
 	
-	int sum(int a, int b) {
+	public int sum(int a, int b) { // 추상메서드 사용 시 public 필수!!!
 		return a + b;
 	}
 }
 
-class AdvancedCalculator extends SimpleCalculator {
+class AdvancedCalculator extends SimpleCalculator implements Calculable{
 	
-	int sum(int num[]) {
+	public int sum(int num[]) {
 		int sum = 0;
 		for(int i = 0; i < num.length; i++) {
 			sum += num[i];
