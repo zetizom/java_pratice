@@ -22,49 +22,29 @@ public class Advent_of_code_4_Part2 {
         }
 
         // --- 일반화된 탐색 로직 시작 ---
-        final int WORD_LEN = WORD_TO_FIND.length();
         final int MAX_ROWS = grid.size();
         final int MAX_COLS = grid.get(0).length(); 
-        int count = 0;
-        
+  		int count = 0;      
 
         // 1. 모든 시작 지점 (r, c)을 순회
-        for (int r = 0; r < MAX_ROWS; r++) {
-            for (int c = 0; c < MAX_COLS; c++) {
+        for (int r = 1; r < MAX_ROWS - 1; r++) { // 범위 제한은 for문을 통해서 
+            for (int c = 1; c < MAX_COLS - 1; c++) {           
             	
-            	boolean wordFound = false;
-            	
-            	if(grid.get(r).charAt(c) == 'A') {           		
-            		if ( (r-1) < 0 || (r+1) >= MAX_ROWS || (c-1) < 0 || (c+1) >= MAX_COLS) {
-            			wordFound = false;
-            		}
-            		else {
-            			if(grid.get(r-1).charAt(c-1) =='M' && grid.get(r+1).charAt(c+1) == 'S') {
-            				if(grid.get(r+1).charAt(c-1) == 'M' && grid.get(r-1).charAt(c+1) == 'S') {
-            					wordFound = true;
-            				}
-            				if(grid.get(r+1).charAt(c-1) == 'S' && grid.get(r-1).charAt(c+1) == 'M') {
-           						wordFound = true;
-            					}
-            			}
-            			if(grid.get(r-1).charAt(c-1) =='S' && grid.get(r+1).charAt(c+1) == 'M') {
-            				if(grid.get(r+1).charAt(c-1) == 'M' && grid.get(r-1).charAt(c+1) == 'S') {
-            					wordFound = true;
-           					}
-           					if(grid.get(r+1).charAt(c-1) == 'S' && grid.get(r-1).charAt(c+1) == 'M') {
-           						wordFound = true;
-           					}
-           				}	
-            		}   
-            	
+            	if(grid.get(r).charAt(c) != 'A') {
+            		continue;
             	}
-            	else {
-            		wordFound = false;
-            	}
-                
-            	if (wordFound) {
+            	
+            	char topLeft = grid.get(r-1).charAt(c-1);
+            	char topRight = grid.get(r-1).charAt(c+1);
+            	char bottomLeft = grid.get(r+1).charAt(c-1);
+            	char bottomRight = grid.get(r+1).charAt(c+1);
+            	   
+            	boolean diagonal1 = (topLeft == 'M' && bottomRight == 'S') || (topLeft == 'S' && bottomRight == 'M');
+            	boolean diagonal2 = (topRight == 'M' && bottomLeft == 'S') || (topRight == 'S' && bottomLeft == 'M');
+            	
+            	if (diagonal1 && diagonal2) {
             		count++;
-                }            	            	   
+            	}          	            	   
             }
         }
         
